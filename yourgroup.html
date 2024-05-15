@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Groups</title>
+<link rel="stylesheet" href="groupstudy.css"> <!-- Assuming you have a separate CSS file -->
+<style>
+    .row {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .group-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 60px;
+    }
+
+    .group-box {
+        height :auto;
+        width: 300px; /* Adjust the width as needed */
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+
+    }
+
+    .button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .button:hover {
+        background-color: #f8364c;
+    }
+
+    #groupMembersModal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #groupMembersModalContent {
+        background-color: #000000;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        animation-name: zoom;
+        animation-duration: 0.3s;
+    }
+
+    #closeModalButton {
+        color: #3919ee;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    #groupMembersList {
+        color: #ffffff; /* Blue color font */
+        overflow-y: auto; /* Enable vertical scrollbar */
+        max-height: 300px; /* Max height of the modal content */
+    }
+
+    @keyframes zoom {
+        from {transform: scale(0)}
+        to {transform: scale(1)}
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>Your Groups</h1>
+</header>
+<main>
+    <div class="row">
+        <h2>Joined Groups</h2>
+        <div id="joinedGroupsContainer" class="group-container"></div> <!-- Container for joined groups -->
+    </div>
+    <div class="row">
+        <h2>Created Groups</h2>
+        <div id="createdGroupsContainer" class="group-container"></div> <!-- Container for created groups -->
+    </div>
+
+    <!-- Group Members Modal -->
+    <div id="groupMembersModal">
+        <div id="groupMembersModalContent">
+            <span id="closeModalButton">&times;</span>
+            <h2>Group Members</h2>
+            <ul id="groupMembersList"></ul>
+        </div>
+    </div>
+</main>
+<footer>
+    <p>&copy; 2024 Study Group. All rights reserved.</p>
+</footer>
+<script>
+window.onload = function() {
+    // Decode URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+    const email = urlParams.get('email');
+
+    // Fetch joined groups via AJAX
+    fetchJoinedGroups(username);
+
+    // Fetch created groups via AJAX
+    fetchCreatedGroups(username);
+};
+
+function fetchJoinedGroups(username) {
+    fetch(`fetch_joined_groups.php?username=${encodeURIComponent(username)}`)
+    .then(response => response.json())
+    .then(joinedGroups => {
+        const joinedGroupsContainer = document.getElementById('joinedGroupsContainer');
+        joinedGroups.forEach(group => {
+            const groupBox = document.createElement('div');
+            groupBox.classList.add('group-box');
+            groupBox.innerHTML = `
+                <div class="group-details">
+                    <p><strong>Group Name:</strong> ${group.GroupName}</p>
+                    <p><strong>Description:</strong> ${group.Description}</p>
+                </div>
+                <button class="button delete-button" onclick="leaveGroup(${group.GroupID}, '${username}')">Leave</button>
+                <a href="join.html?groupName=${group.GroupName}&username=${username}" class="button">Open</a>
+
+                <button class="button group-members-button" onclick="showGroupMembers(${group.GroupID})">Group Members</button>
+            `;
+            joinedGroupsContainer.appendChild(groupBox);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle errors or display error message
+        alert("An error occurred while fetching joined groups. Please try again later.");
+    });
+}
+
+function fetchCreatedGroups(username) {
+    fetch(`fetch_created_groups.php?username=${encodeURIComponent(username)}`)
+    .then(response => response.json())
+    .then(createdGroups => {
+        const createdGroupsContainer = document.getElementById('createdGroupsContainer');
+        createdGroups.forEach(group => {
+            const groupBox = document.createElement('div');
+            groupBox.classList.add('group-box');
+            groupBox.innerHTML = `
+                <div class="group-details">
+                    <p><strong>Group Name:</strong> ${group.GroupName}</p>
+                    <p><strong>Description:</strong> ${group.Description}</p>
+                </div>
+                <button class="button delete-button" onclick="deleteGroup(${group.GroupID})">Delete</button>
+                <button class="button group-members-button" onclick="showGroupMembers(${group.GroupID})">Group Members</button>
+            `;
+            createdGroupsContainer.appendChild(groupBox);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle errors or display error message
+        alert("An error occurred while fetching created groups. Please try again later.");
+    });
+}
+
+function leaveGroup(groupId, username) {
+    // Confirm if the user really wants to leave the group
+    if (confirm("Are you sure you want to leave this group?")) {
+        // Prepare the data to be sent in the request body
+        const data = {
+            groupId: groupId,
+            username: username
+        };
+
+        // Send a POST request to leave_group.php
+        fetch('leave_group.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                // If the request was successful, parse the JSON response
+                return response.json();
+            } else {
+                // If the request was not successful, throw an error with the response status
+                throw new Error('Failed to leave the group.');
+            }
+        })
+        .then(data => {
+            // Display the success message from the response
+            alert(data.message);
+            // Reload the page to reflect changes if successful
+            window.location.reload();
+        })
+        .catch(error => {
+            // If an error occurred while making the request, display an error message
+            console.error('Error:', error);
+            alert("An error occurred while leaving the group. Please try again later.");
+        });
+    }
+}
+
+function deleteGroup(groupId) {
+    // Confirm if the user really wants to delete the group
+    if (confirm("Are you sure you want to delete this group?")) {
+        // Prepare the data to be sent in the request body
+        const data = {
+            groupId: groupId
+        };
+
+        // Send a POST request to delete_group.php
+        fetch('delete_group.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                // If the request was successful, parse the JSON response
+                return response.json();
+            } else {
+                // If the request was not successful, display an error message
+                throw new Error('Failed to delete the group.');
+            }
+        })
+        .then(data => {
+            // Display the success message from the response
+            alert(data.message);
+            // Reload the page to reflect changes if successful
+            window.location.reload();
+        })
+        .catch(error => {
+            // If an error occurred while making the request, display an error message
+            console.error('Error:', error);
+            alert("An error occurred while deleting the group. Please try again later.");
+        });
+    }
+}
+
+function showGroupMembers(groupId) {
+    // Make an AJAX request to fetch group members
+    fetch(`fetch_group_members.php?groupId=${encodeURIComponent(groupId)}`)
+    .then(response => response.json())
+    .then(groupMembers => {
+        // Display group members dynamically
+        const memberList = groupMembers.map(member => `<li>${member.username}</li>`).join('');
+        // Show the member list in the modal
+        document.getElementById('groupMembersList').innerHTML = memberList;
+        document.getElementById('groupMembersModal').style.display = 'block';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle errors or display error message
+        alert("An error occurred while fetching group members. Please try again later.");
+    });
+}
+
+// Close the modal when the close button is clicked
+document.getElementById('closeModalButton').addEventListener('click', function() {
+    document.getElementById('groupMembersModal').style.display = 'none';
+});
+
+</script>
+</body>
+</html>

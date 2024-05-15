@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS for search bar */
+       /* CSS for search bar */
+#searchBar {
+    position: fixed; /* Fixed position to keep the search bar always visible */
+    top: 20px;
+    right: 20px;
+    z-index: 9999; /* Ensure it's above other content */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 10px; /* Add padding for spacing */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-shadow: 0 2px 5px rgba(236, 229, 229, 0.2); /* Add shadow for depth */
+}
+
+/* Other styles for search bar elements (input, button) */
+
+        #searchInput {
+            border: 2px solid white;
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            outline: none;
+        }
+        #searchButton {
+            background-color: white;
+            border: none;
+            color: rgb(10, 231, 28);
+            cursor: pointer;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+       /* CSS for the upload button */
+#uploadButton {
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    margin-bottom: 80px;
+}
+
+#uploadButton:hover {
+    background-color: #10f546; /* Green color on hover */
+}
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(6, 129, 230, 0.7); }
+    50% { box-shadow: 0 0 20px rgba(201, 41, 102, 0.9); }
+    100% { box-shadow: 0 0 5px rgba(32, 162, 238, 0.7); }
+}
+
+h3 {
+    background-color: rgb(85, 82, 224);
+    display: inline-block;
+    animation: glow 2s infinite alternate; /* Apply the glow animation */
+}
+
+    </style>
+</head>
+<body>
+    <h1>Library</h1>
+    <!-- Search bar -->
+    <h3>Upload your books in library</h3>
+    <div id="searchBar">
+        <input type="text" id="searchInput" placeholder="Search your book...">
+        <button id="searchButton">Search </button>
+    </div>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput">
+        <button id="uploadButton">Upload</button>
+    </form>
+    <h3>Download the books</h3>
+    <div id="shelves-container"></div>
+    <script src="script.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>

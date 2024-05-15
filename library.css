@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #fff;
+}
+
+h1 {
+    text-align: center;
+}
+
+#filesList {
+    margin-top: 20px;
+}
+
+input[type=file] {
+    display: block;
+    margin: 0 auto;
+    /* Apply blue color */
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+input[type=file]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
+}
+
+button[type=submit] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button[type=submit]:hover {
+    background-color: #dc3545;
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+}
+
+video {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+/* Style for the shelf */
+.shelf {
+    border: 20px solid #000000; /* Brown border */
+    padding: 20px; /* Padding for the shelf */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align books to the start of the shelf */
+    align-items: flex-start; /* Align books to the top of the shelf */
+    height: auto; /* Allow the shelf to adjust its height based on content */
+    margin-bottom: 30px;
+    background-color: #8cc969; /* White background color for the shelf */
+    box-shadow: 0 5px 15px #87ceeb; /* Skyblue shadow as hover effect */
+}
+
+/* Style for each domain row */
+.domain-row {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping within the row */
+    margin-bottom: 20px; /* Add space between domain rows */
+}
+
+/* Style for each book */
+.book {
+    width: calc(25% - 20px); /* Set width to occupy 25% of the row */
+    max-width: 150px; /* Maximum width for each book */
+    height: 200px; /* Height of each book */
+    background-color: #ff7a05; /* Different color for each book */
+    margin: 10px; /* Margin between each book */
+    padding: 10px; /* Padding for each book */
+    border-radius: 10px; /* Rounded corners for the book */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: box-shadow 0.3s; /* Transition for hover effect */
+}
+
+/* Hover effect for book */
+.book:hover {
+    background-color: #F08080; /* Lighter shade of red on hover */
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); /* Red shadow as hover effect */
+}
+
+/* Style for book name */
+.book-name {
+    text-align: center; /* Center align book name */
+    font-weight: bold; /* Bold font for book name */
+}
+
+/* Style for download button */
+.book-download {
+    background-color: #FFA07A; /* Lighter shade of orange */
+    color: #fff; /* White text color */
+    padding: 5px 10px; /* Padding for button */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners for button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    text-decoration: none; /* Remove default link decoration */
+}
+
+/* Hover effect for download button */
+.book-download:hover {
+    background-color: #ff2600; /* Darker shade of orange on hover */
+}

@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #1f1f1f;
+    color: #fff; /* Text color */
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.btn {
+    background-color: #007bff; /* Blue color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* White shadow */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker shade of blue on hover */
+}
+
+#createGroupForm {
+    display: none; /* Hide by default */
+    max-width: 500px;
+    margin: 20px auto;
+    background-color: #444; /* Darker background color */
+    border: 1px solid #666; /* Darker border color */
+    border-radius: 5px;
+    padding: 20px;
+    color: #fff;
+}
+
+#createForm input[type="text"],
+#createForm input[type="password"],
+#createForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #f8f4f4; /* Darker border color */
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+    background-color: #ebebeb; /* Darker input background color */
+    color: #000000; /* White text color */
+    
+}
+
+#createForm textarea {
+    height: 100px; /* Set a fixed height for textarea */
+}

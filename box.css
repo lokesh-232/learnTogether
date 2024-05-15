@@ -1,0 +1,52 @@
+body{
+    overflow: auto;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+}
+
+.box {
+    background-color: white; /* Transparent white background */
+    padding: 10px;
+    width: 800px;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease; /* Smooth transition for box-shadow */
+    margin-top: 80px;
+    margin-left: 90px;
+    margin-right: 87px;
+    margin-bottom: 200px;
+}
+
+.btn {
+    background-color: #007bff; /* Blue color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for background-color */
+}
+.box:hover {
+    background-color: skyblue;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow effect on hover */
+}
+.box p {
+    text-align: left;
+    margin-bottom: 20px;
+    color: black;
+    font-family: initial;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+#chatBtn{
+    margin-top: 45px;
+}
+

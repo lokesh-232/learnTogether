@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Group Page</title>
+<link rel="stylesheet" href="group.css">
+<link rel="stylesheet" href="box.css">
+</head>
+<body>
+    <h1>JOIN THE GROUPS OR CREATE YOUR OWN GROUP</h1>
+<div class="container">
+    <div id="joinBox" class="box">
+        <h2>Join Group</h2>
+        <p>Click here to join an existing group and connect with other members. Share ideas, collaborate on projects, and engage in discussions with like-minded individuals.</p>
+
+        <button id="joinBtn" class="btn">Join Group</button>
+    </div>
+    <div id="createBox" class="box">
+        <h2>Create Group</h2>
+        <p>Ready to start your own community? Use this button to create a new group. Define your group's purpose, set its name and description, and invite others to join your community.</p>
+
+        <button id="createBtn" class="btn">Create Group</button>
+    </div>
+</div>
+
+<div id="createGroupForm" class="container">
+    <h2>Create Group</h2>
+    <form id="createForm" action="create_group.php" method="post">
+        <input type="text" id="groupName" name="groupName" placeholder="Enter Group Name" required><br>
+        <textarea id="groupDescription" name="groupDescription" placeholder="Enter Group Description" required></textarea><br>
+        <input type="text" id="domain" name="domain" placeholder="Enter Domain" required><br>
+        <input type="text" id="userName" name="userName" placeholder="Enter Your Username" required><br>
+        <input type="password" id="password" name="password" placeholder="Enter Your Password" required><br>
+        <button type="submit" class="btn">Create</button>
+    </form>
+</div>
+<div id="errorMessage" class="container hidden"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get references to the buttons and form
+        var joinBtn = document.getElementById("joinBtn");
+        var createBtn = document.getElementById("createBtn");
+        var createGroupForm = document.getElementById("createGroupForm");
+     
+        joinBtn.addEventListener("click", function() {
+        // Redirect to the groups.html page
+       var userDetails=getUserDetailsFromURL();
+       console.log(userDetails);
+        const redirectUrl = `groups.html?success=${encodeURIComponent(userDetails.success)}&username=${encodeURIComponent(userDetails.username)}&email=${encodeURIComponent(userDetails.email)}`;
+  
+        window.location.href = redirectUrl;
+
+
+    });
+
+        // Add click event listener to the "Create Group" button
+        createBtn.addEventListener("click", function() {
+            // Hide the "Create Group" button
+            createBtn.style.display = "none";
+            // Show the group creation form
+            createGroupForm.style.display = "block";
+            createGroupForm.scrollIntoView({ behavior: "smooth", block: "end" });
+        });
+
+    });
+    
+    function getUserDetailsFromURL() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const userDetails = {
+        success: urlParams.get('success'),
+        username: urlParams.get('username'),
+        email: urlParams.get('email')
+    };
+    var name=userDetails.username;
+    console.log(name);
+  
+    return userDetails;
+
+}
+</script>
+</body>
+</html>

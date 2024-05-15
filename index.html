@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Study Groups</title>
+<link rel="stylesheet" href="index.css">
+<style>
+    /* CSS for user icon */
+    .user-icon {
+        background-color: #21db31; /* Example color */
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        margin-left: auto; /* Add this to push the icon to the right */
+        margin-right: 20px;
+        margin-bottom: 0px;
+        cursor: pointer;
+    }
+
+    /* CSS for user details */
+    .user-details {
+        margin-left: 20px;
+        color: #f0ebeb; /* Example color */
+        font-size: 16px;
+        margin-bottom: 10px; /* Add margin bottom to create space */
+    }
+
+    /* CSS for logout button */
+    .user-actions {
+        position: absolute;
+        right: 20px;
+        bottom: 80%; /* Change bottom position */
+        display: none;
+    }
+
+    .user-actions button {
+        cursor: pointer;
+        color: white;
+        background-color: #1ee63f; /* Example color */
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-size: 16px;
+        border: none;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+
+    .user-actions button:hover {
+        background-color: #d9534f; /* Example hover color */
+    }
+</style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#" class="btn">Home</a></li>
+            <li><a href="about.html" class="btn">About</a></li>
+            <li><a href="http://localhost:8080/studygroup/study/group.html" class="btn">Groups</a></li>
+            <li><a href="#contact" class="btn">Contact</a></li>
+            <li><a href="http://localhost:8080/merge/group/login.html" class="btn">Login</a></li>
+            <li><a href="http://localhost:8080/merge/group/signup.html" class="btn">Signup</a></li>
+            <li id="userIconContainer"></li>
+        </ul>
+    </nav>
+    <div id="userContainer" style="display: none;">
+        <div id="userIcon" class="user-icon"></div>
+        <div id="userInfo" class="user-details"></div>
+       
+    </div>
+</header>
+
+<section class="hero-section" id="hero">
+    <div id="userActions" class="user-actions">
+        <button id="logoutButton" style="display: none;">Logout</button>
+        <br>
+        <button id="yourGroupsButton" style="display: none;">Your Groups</button>
+    </div>
+    <div class="hero-content">
+        <h1>Welcome to Learn Together</h1>
+        <p>Discover the power of collaboration and learning.</p>
+        <button class="get-started-btn">Get Started</button>
+    </div>
+</section>
+<section class="about-section" id="about">
+    <div class="about-content">
+        <h2>About Us</h2>
+        <p>We are dedicated to facilitating collaboration and knowledge sharing among students through study groups. Our platform provides a space for students to connect with peers, share resources, and work together to achieve academic success.</p>
+        <div class="video-container">
+            <!-- Videos will be added dynamically here -->
+        </div>
+    </div>
+</section>
+<section class="group-section">
+    <div class="group-content">
+        
+        <h2>Study Groups</h2>
+        <div class="group-images row1">
+            <video class="group-video" preload="metadata" muted autoplay loop>
+                <source src="indexgroupex.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video class="group-video" preload="metadata" muted autoplay loop>
+                <source src="indexgroupex1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video class="group-video" preload="metadata" muted autoplay loop>
+                <source src="indexgroupex2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="group-images row2">
+            <video class="group-video" preload="metadata" muted autoplay loop>
+                <source src="indexgroupex3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video class="group-video" preload="metadata" muted autoplay loop>
+                <source src="indexgroupex4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <!-- Add more video elements for additional study groups -->
+        <p>Maximize your learning potential by joining a study group. Collaborate to tackle challenging problems, clarify doubts, and reinforce key concepts. Share study strategies, resources, and time management tips for academic success.Embrace diverse perspectives to foster creativity and innovative thinking. Take advantage of guest speakers or experts for insightful Q&A sessions and networking opportunities. Together, strive towards academic excellence in a supportive and motivating environment. Join a study group today and unlock your full potential!"
+       </p>
+        <button class="view-groups-btn">View Groups</button>
+    </div>    
+</section>
+<section class="contact-section" id="contact">
+    <h2>Contact Us</h2>
+    <form action="admin.php" method="post" id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+    <div id="messageContainer"></div> <!-- Container to display message -->
+</section>
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2024 Our Company. All Rights Reserved.</p>
+        <nav>
+            <ul>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="term.html">Terms of Service</a></li>
+                <li><a href="#">Sitemap</a></li>
+                <li><a href="http://localhost:8080/merge/group/admin/adminlogin.html">admin</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+<script>
+window.onload = function() {
+    // Get the "Groups" link element
+    const groupsLink = document.querySelector('a[href="http://localhost:8080/studygroup/study/group.html"]');
+    const groupsLink1 = document.querySelector('a[href="http://localhost:8080/studygroup/study/group.html"]');
+    
+    // Get the "Get Started" button element
+    const getStartedButton = document.querySelector('.get-started-btn');
+    // Get URL parameters
+    const params = new URLSearchParams(window.location.search);
+    var success = params.get('success');
+    const username = params.get('username');
+    const email = params.get('email');
+
+    // Add an event listener to the "click" event of the link
+    groupsLink.addEventListener('click', function(event) {
+        // Prevent the default behavior of the link (opening the URL)
+        event.preventDefault();
+
+        // Once the user clicks on the link, open the redirectUrl
+        const redirectUrl = `group.html?success=${encodeURIComponent(success)}&username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}`;
+        window.location.href = redirectUrl;
+    });
+    getStartedButton.addEventListener('click', function(event) {
+        // Prevent the default behavior of the button (form submission)
+        event.preventDefault();
+
+        // Check if success parameter is true
+        if (success === 'true') {
+            // Redirect to group.html
+            const redirectUrl = `group.html?success=${encodeURIComponent(success)}&username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}`;
+            window.location.href = redirectUrl;
+        } else {
+            // Redirect to login.html
+            window.location.href = 'http://localhost:8080/merge/group/login.html';
+        }
+    });
+    // Check if success parameter is true and username is provided
+    if (success === 'true' && username) {
+        // Display username and email
+        localStorage.setItem('success', success);
+
+        // Display user icon with the starting letter of the username
+        const userIcon = document.getElementById('userIcon');
+        userIcon.innerText = username.charAt(0).toUpperCase(); // Set the starting letter of username as icon text
+
+        // Show user details container
+        document.getElementById('userContainer').style.display = 'flex';
+
+        // Toggle user details and logout button on click
+        let userDetailsVisible = false;
+        userIcon.addEventListener('click', function() {
+            document.getElementById('userInfo').innerText = `user name : ${username}\n email : ${email}`;
+            userDetailsVisible = !userDetailsVisible;
+            const userInfo = document.getElementById('userInfo');
+            const userActions = document.getElementById('userActions');
+            userInfo.style.display = userDetailsVisible ? 'block' : 'none';
+            userActions.style.display = userDetailsVisible ? 'block' : 'none';
+        });
+
+        // Add event listener for logout button click
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            // Set login status to false in local storage
+            success = false;
+            console.log(success);
+            localStorage.setItem('success', success);
+
+            // Redirect to login page
+            window.location.href = 'http://localhost:8080/merge/study/index.html';
+        });
+
+        // Add event listener for "Your Groups" button click
+        document.getElementById('yourGroupsButton').addEventListener('click', function() {
+            // Redirect to yourgroup.html with username and email as URL parameters
+            const redirectUrl = `yourgroup.html?username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}`;
+            window.location.href = redirectUrl;
+        });
+
+        // Show "Your Groups" button
+        document.getElementById('logoutButton').style.display = 'inline-block';
+        document.getElementById('yourGroupsButton').style.display = 'inline-block';
+    }
+
+};
+
+</script>
+<script src="index.js"></script>
+<script src="admin.js"></script>
+<script src="contact.js"></script>
+</body>
+</html>

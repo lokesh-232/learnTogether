@@ -1,0 +1,344 @@
+/* Set body styles */
+body {
+    background-color: #222; /* Set dark background color */
+    color: #fff; /* Set text color to white */
+    font-family: 'Arial', sans-serif; /* Set default font family */
+    line-height: 1.6; /* Set line height for better readability */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+body {
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.page {
+    opacity: 0;
+    transition: opacity 0.75s ease; /* Smooth transition for opacity */
+}
+
+.page.active {
+    opacity: 1;
+}
+/* Header styles */
+header {
+    background-color: #1e88e5; /* Set header background color */
+    padding: 20px 0; /* Adjust padding as needed */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px; /* Adjust horizontal padding */
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff; /* Set text color */
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+    margin-right: 20px; /* Adjust spacing between navigation links */
+}
+
+.nav-links li:last-child {
+    margin-right: 0; /* Remove margin from last navigation link */
+}
+
+.nav-links a {
+    font-size: 1rem;
+    color: #fff; /* Set text color */
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    color: #fbc02d; /* Change text color on hover */
+}
+
+/* Hero section styles */
+.hero-section {
+    background-image: url('indeximg.jpg'); /* Replace 'hero-background.jpg' with the path to your background image */
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px; /* Adjust padding as needed */
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+}
+
+.get-started-btn {
+    font-size: 1.1rem;
+    background-color: #1e88e5; /* Adjust button color */
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.get-started-btn:hover {
+    background-color: #1565c0; /* Adjust button hover color */
+}
+/* About section styles */
+.about-section {
+    background-color: #333; /* Set background color */
+    padding: 100px 0; /* Adjust padding as needed */
+    text-align: center;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    position: relative;
+    width: 100%;
+    height: 400px; /* Set height for the video container */
+    overflow: hidden;
+}
+
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Group Section Styles */
+.group-section {
+    background-color: #222;
+    padding: 50px 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.group-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.group-images {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.group-video {
+    width: 300px;
+    height: auto;
+    margin: 10px;
+    transition: filter 0.3s ease;
+    filter: blur(0);
+}
+
+.view-groups-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-groups-btn:hover {
+    background-color: #45a049;
+}
+
+/* Study Group Section Styles */
+.group-video {
+    width: 100%;
+    height: auto;
+    outline: none;
+}
+
+.group-video::-webkit-media-controls {
+    display: none;
+}
+
+.group-video::-webkit-media-controls-enclosure {
+    display: none;
+}
+
+    @font-face {
+        font-family: 'CustomFontName';
+        src: url('customfont.woff2') format('woff2'),
+             url('customfont.woff') format('woff');
+        /* Add additional font properties here if needed */
+    }
+    .group-content {
+        font-family: 'CustomFontName', Arial, sans-serif;
+        /* Additional styles for .group-content */
+    }    
+    .group-video {
+        width: 700px; /* Set the desired width */
+        height: auto; /* Ensure aspect ratio is maintained */
+    }
+    /* Ensure last video doesn't have right margin */
+    .group-video:last-child {
+        margin-right: 0;
+    }
+    .group-images {
+        display: flex;
+    }
+    .group-video {
+        width: 300px;
+        height: auto;
+        margin-right: 20px;
+        transition: filter 0.3s ease;
+        filter: blur(0); /* Apply no blur effect to all videos initially */
+    }
+    
+    .highlight {
+        filter: none; /* Remove blur effect for highlighted video */
+    }
+    
+    .blur {
+        filter: blur(5px); /* Apply blur effect to non-highlighted videos */
+    }
+    .group-images {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .row1 .group-video {
+        animation: moveRightToLeft 10s linear infinite alternate;
+    }
+    
+    .row2 .group-video {
+        animation: moveLeftToRight 10s linear infinite alternate;
+    }
+    
+    @keyframes moveRightToLeft {
+        from { transform: translateX(100%); }
+        to { transform: translateX(-100%); }
+    }
+    
+    @keyframes moveLeftToRight {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(100%); }
+    }
+    .contact-section {
+        background-color: #222;
+        padding: 50px 20px;
+        text-align: center;
+    }
+    
+    .contact-section h2 {
+        margin-bottom: 20px;
+    }
+    
+    .contact-section form {
+        display: flex;
+        flex-direction: column;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .contact-section input,
+    .contact-section textarea {
+        margin-bottom: 20px;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .contact-section button {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .contact-section button:hover {
+        background-color: #45a049;
+    }
+    
+    footer {
+        background-color: #080808;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    footer nav ul li {
+        display: inline;
+        margin: 0 10px;
+    }
+    
+    footer nav ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
+    body {
+        overflow-x: hidden; /* Hide horizontal scrollbar */
+    }
+    
+    .page {
+        opacity: 0;
+        transition: opacity 0.5s ease; /* Smooth transition for opacity */
+    }
+    
+    .page.active {
+        opacity: 1;
+    }
+    

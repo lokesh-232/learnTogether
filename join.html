@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Group</title>
+<link rel="stylesheet" href="box.css">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #1f1f1f;
+    color: #fff; /* Text color */
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.btn {
+    background-color: #007bff; /* Blue color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* White shadow */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker shade of blue on hover */
+}
+</style>
+</head>
+<body>
+<h1>Joined Group: <span id="groupName"></span></h1>
+<div class="container">
+    <div id="joinBox" class="box">
+        <h2>Chat With the group members</h2>
+        <p>Interact with your group members seamlessly through the Chat feature, where you can exchange messages and ideas in real-time, fostering collaboration and communication. Need to access shared resources or reference materials</p>
+
+        <button id="chatBtn" class="btn">discuss</button>
+    </div>
+    <div id="createBox" class="box">
+        <h2>Library</h2>
+        <p>Navigate to the Library, where you'll find a curated collection of files and documents uploaded by your group, organized by domain for easy browsing and retrieval. Whether you're discussing project updates or conducting research, the Chat and Library buttons provide convenient access to essential tools for effective group collaboration and knowledge sharing.</p>
+
+        <button id="libraryBtn" class="btn">library</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Function to decode URL and extract group name parameter
+    function getGroupNameFromURL() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        return urlParams.get('groupName');
+    }
+    function getUsernameFromURL() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            return urlParams.get('username');
+        }
+    // Function to update group name on the page
+    function updateGroupName() {
+        const groupName = getGroupNameFromURL();
+        const groupNameElement = document.getElementById("groupName");
+        if (groupName && groupNameElement) {
+            groupNameElement.textContent = groupName;
+        } else {
+            groupNameElement.textContent = "Unknown Group";
+        }
+    }
+
+    // Add event listeners to the buttons
+    const chatBtn = document.getElementById("chatBtn");
+    const libraryBtn = document.getElementById("libraryBtn");
+
+    chatBtn.addEventListener("click", function() {
+        // Redirect to chat page with group name parameter
+        const groupName = getGroupNameFromURL();
+        const username = getUsernameFromURL();
+        window.location.href = `http://localhost:3000?groupName=${encodeURIComponent(groupName)}&username=${encodeURIComponent(username)}`;
+        u=`../chatApp/index.html?username=${encodeURIComponent(username)}`;
+    });
+
+    libraryBtn.addEventListener("click", function() {
+        // Redirect to library page with group name parameter
+        const groupName = getGroupNameFromURL();
+        const username = getUsernameFromURL();
+        window.location.href = `../library/index.html?groupName=${encodeURIComponent(groupName)}&username=${encodeURIComponent(username)}`;
+    });
+
+    // Call function to update group name on page load
+    updateGroupName();
+});
+</script>
+</body>
+</html>
