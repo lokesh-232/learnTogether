@@ -157,8 +157,8 @@
 <script>
 window.onload = function() {
     // Get the "Groups" link element
-    const groupsLink = document.querySelector('a[href="http://localhost:8080/studygroup/study/group.html"]');
-    const groupsLink1 = document.querySelector('a[href="http://localhost:8080/studygroup/study/group.html"]');
+    const groupsLink = document.querySelector('a[href="studygroup.html"]');
+    const groupsLink1 = document.querySelector('a[href="group.html"]');
     
     // Get the "Get Started" button element
     const getStartedButton = document.querySelector('.get-started-btn');
@@ -188,7 +188,7 @@ window.onload = function() {
             window.location.href = redirectUrl;
         } else {
             // Redirect to login.html
-            window.location.href = 'http://localhost:8080/merge/group/login.html';
+            window.location.href = 'login.html';
         }
     });
     // Check if success parameter is true and username is provided
